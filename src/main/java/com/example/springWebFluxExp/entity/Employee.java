@@ -3,17 +3,17 @@ package com.example.springWebFluxExp.entity;
 
 import lombok.Data;
 import lombok.ToString;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Table;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
 
-@Table(value="employee")
+
 @Data
 @ToString
+@Document
 public class Employee {
 
-
-    @Id
+    @MongoId
     private Long id;
     private String name;
     private String code;

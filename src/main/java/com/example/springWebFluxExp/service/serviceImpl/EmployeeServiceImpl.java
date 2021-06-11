@@ -32,16 +32,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public Mono<Employee> updateEmployeeById(EmployeeRequestDto employeeRequestDto, Long id){
-        Mono<Employee> employeeMono = employeeRepository.findById(id).doOnSuccess(System.out::println);
-        employeeMono.subscribe(emp -> {
-            emp.setName(employeeRequestDto.getName());
-            emp.setCode(employeeRequestDto.getCode());
-            emp.setDepartmentName(employeeRequestDto.getDepartmentName());
-            System.out.println("Before");
-            employeeRepository.save(emp).subscribe();
-            System.out.println("After");
-        });
-        return employeeMono;
+        return employeeRepository.findById(id)
+                .flatMap(emp-> {
+                    emp.setName(employeeRequestDto.getName());
+                    emp.setCode(employeeRequestDto.getCode());
+                    emp.setDepartmentName(employeeRequestDto.getDepartmentName());
+                    return employeeRepository.save(emp);
+                });
     }
 
     @Override

@@ -1,7 +1,7 @@
 package com.example.springWebFluxExp.repository;
 
 import com.example.springWebFluxExp.entity.Employee;
-import org.springframework.data.repository.reactive.ReactiveCrudRepository;
+import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 
-public interface EmployeeRepository extends ReactiveCrudRepository<Employee,Long> {
+public interface EmployeeRepository extends ReactiveMongoRepository<Employee,Long> {
 }
